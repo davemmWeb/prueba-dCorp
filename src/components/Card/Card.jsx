@@ -50,9 +50,9 @@ const Card = ({ name, image, comics, peliculas }) => {
 
 			<Image>
 				<img
-					alt="Developer"
+					alt="Image"
 					src={`${image}.jpg`}
-					className="h-16 w-16 rounded-full object-cover"
+					className="h-16 w-16 rounded-full object-cover hover:bg-"
 					style={{ margin: "auto", marginTop: "2rem" }}
 				/>
 			</Image>

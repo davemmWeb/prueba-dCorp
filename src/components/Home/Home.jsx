@@ -425,24 +425,25 @@ const Home = () => {
 		const res = await axios.get(
 			`https://gateway.marvel.com/v1/public/characters?ts=1&apikey=${apiKey}&hash=${hash}`
 		);
-		setData(res.data);
+		setData(res.data.data.results);
 	};
+	useEffect(() => {
+		getDataApi();
+	}, []);
+	console.log(data);
 
 	// Cálculo de la paginación
-	const totalCards = dataFalse.length;
+	const totalCards = data?.length;
 	const totalPages = Math.ceil(totalCards / PAGE_SIZE);
 	const startIndex = (currentPage - 1) * PAGE_SIZE;
 	const endIndex = startIndex + PAGE_SIZE;
-	const currentCards = dataFalse.slice(startIndex, endIndex);
+	const currentCards = data?.slice(startIndex, endIndex);
 
 	// Función para cambiar de página
 	const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
 	};
 
-	useEffect(() => {
-		getDataApi();
-	}, []);
 	return (
 		<div className="flex justify-center">
 			<div className="text-center" style={{ marginTop: "2rem" }}>
@@ -480,14 +481,14 @@ const Home = () => {
 						alignItems: "center",
 					}}
 				>
-					{currentCards.map((char, index) => {
+					{currentCards?.map((char, index) => {
 						return (
 							<Link to={`/modal/${char.id}`}>
 								<Card
 									name={char.name}
-									image={char.image}
-									comics={char.comics.length}
-									peliculas={char.peliculas.length}
+									image={char.thumbnail.path}
+									comics={char.comics.available}
+									peliculas={char.stories.available}
 								/>
 							</Link>
 						);

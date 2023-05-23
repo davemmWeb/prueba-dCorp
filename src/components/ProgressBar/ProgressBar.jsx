@@ -1,13 +1,13 @@
 const ProgressBar = ({ dataFalse, dataApi }) => {
 	let cantidadTotalPeliculas = 0;
 
-	dataFalse.forEach((char) => {
-		cantidadTotalPeliculas += char.peliculas.length;
-	});
-	// dataApi.forEach((char) => {
+	// dataFalse.forEach((char) => {
 	// 	cantidadTotalPeliculas += char.peliculas.length;
 	// });
-	const meta = 200;
+	dataApi.forEach((char) => {
+		cantidadTotalPeliculas += char.stories.available;
+	});
+	const meta = 1000;
 	const porcentajePeliculas = (cantidadTotalPeliculas / meta) * 10;
 
 	const filledWidth = `${porcentajePeliculas * 10}%`;

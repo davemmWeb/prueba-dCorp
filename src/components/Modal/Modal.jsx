@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import hash from "../../utils";
+const apiKey = import.meta.env.VITE_PUBLIC_KEY;
+
 import axios from "axios";
 
 const Modal = () => {
@@ -13,7 +16,7 @@ const Modal = () => {
 		const res = await axios.get(
 			`https://gateway.marvel.com/v1/public/characters/${id}?ts=1&apikey=${apiKey}&hash=${hash}`
 		);
-		setCharacter(res.data);
+		setCharacter(res.data.data.results[0]);
 	};
 
 	const cancelButtonRef = useRef(null);
@@ -21,6 +24,7 @@ const Modal = () => {
 	useEffect(() => {
 		getCharacterById();
 	}, []);
+	console.log(character);
 	return (
 		<div>
 			<Transition.Root show={open} as={Fragment}>
@@ -68,8 +72,13 @@ const Modal = () => {
 														Description {character.description}
 													</p>
 													<img
-														src={`${character.thumbnail}.jpg`}
+														src={`${character.thumbnail?.path}.jpg`}
 														alt={character.name}
+														style={{
+															width: "150px",
+															height: "100px",
+															marginTop: "1rem",
+														}}
 													/>
 												</div>
 											</div>
