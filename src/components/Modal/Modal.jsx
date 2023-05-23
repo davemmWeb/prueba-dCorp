@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import axios from "axios";
 
 const Modal = () => {
 	const { id } = useParams();
 	const [open, setOpen] = useState(true);
+	const [character, setCharacter] = useState([]);
+
+	const getCharacterById = async () => {
+		const res = await axios.get(
+			`https://gateway.marvel.com/v1/public/characters/${id}?ts=1&apikey=${apiKey}&hash=${hash}`
+		);
+		setCharacter(res.data);
+	};
 
 	const cancelButtonRef = useRef(null);
+
+	useEffect(() => {
+		getCharacterById();
+	}, []);
 	return (
 		<div>
 			<Transition.Root show={open} as={Fragment}>
@@ -48,14 +61,16 @@ const Modal = () => {
 													as="h3"
 													className="text-base font-semibold leading-6 text-gray-900"
 												>
-													Detalles del personaje {id}
+													Character Name{character?.name}
 												</Dialog.Title>
 												<div className="mt-2">
 													<p className="text-sm text-gray-500">
-														Are you sure you want to deactivate your account?
-														All of your data will be permanently removed. This
-														action cannot be undone.
+														Description {character.description}
 													</p>
+													<img
+														src={`${character.thumbnail}.jpg`}
+														alt={character.name}
+													/>
 												</div>
 											</div>
 										</div>

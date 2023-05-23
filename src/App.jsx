@@ -1,11 +1,8 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import NavBar from "./components/NavBar/NavBar";
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
 import Home from "./components/Home/Home";
 import Modal from "./components/Modal/Modal";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
 	return (

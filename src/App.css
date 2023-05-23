@@ -1,6 +1,6 @@
 :root{
-  background-image: url("../public/fondo.png");
+  background-image: url("../fondo.png");
   background-size: cover;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9)
 }
 

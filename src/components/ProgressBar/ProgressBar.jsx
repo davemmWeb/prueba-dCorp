@@ -1,28 +1,35 @@
-const ProgressBar = ({ dataFalse }) => {
+const ProgressBar = ({ dataFalse, dataApi }) => {
 	let cantidadTotalPeliculas = 0;
 
 	dataFalse.forEach((char) => {
 		cantidadTotalPeliculas += char.peliculas.length;
 	});
+	// dataApi.forEach((char) => {
+	// 	cantidadTotalPeliculas += char.peliculas.length;
+	// });
+	const meta = 200;
+	const porcentajePeliculas = (cantidadTotalPeliculas / meta) * 10;
 
-	console.log(cantidadTotalPeliculas);
-
-	const filledWidth = `${5 * 10}%`;
+	const filledWidth = `${porcentajePeliculas * 10}%`;
 	const remainingWidth = `${(1 - 8) * 10}%`;
 
 	return (
 		<div
-			className="bg-gray-700 border-yellow-600 border rounded-lg "
-			style={{ width: "400px", height: "102.35px" }}
+			className="border-yellow-500 border rounded-md"
+			style={{
+				width: "400px",
+				height: "102.35px",
+				backgroundColor: "rgba(0, 0, 0, 0.6)",
+			}}
 		>
 			<h1 className="text-yellow-100 text-xs/[5px] mt-2 ml-3">
 				PROGRESO DE PELICULAS PRODUCIDAS
 			</h1>
 			<p className="text-yellow-600 mt-3 ml-48" style={{ fontSize: "8px" }}>
-				XX Peliculas Meta de produccion
+				{meta} Peliculas Meta de produccion
 			</p>
 			<div
-				className="border-yellow-600 border ml-12"
+				className="border-yellow-600 border ml-12 mt-1"
 				style={{
 					width: "280px",
 					height: "29.1px",
@@ -53,8 +60,8 @@ const ProgressBar = ({ dataFalse }) => {
 					/>
 				</div>
 			</div>
-			<p className="text-cyan-400 mt-3 ml-12" style={{ fontSize: "8px" }}>
-				XX Peliculas producidas
+			<p className="text-cyan-400 mt-2 ml-8" style={{ fontSize: "8px" }}>
+				{cantidadTotalPeliculas} Peliculas producidas
 			</p>
 		</div>
 	);

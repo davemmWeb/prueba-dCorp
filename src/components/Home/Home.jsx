@@ -415,7 +415,7 @@ const dataFalse = [
 	},
 ];
 
-const PAGE_SIZE = 4; // Cantidad de tarjetas por página
+const PAGE_SIZE = 5; // Cantidad de tarjetas por página
 
 const Home = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -444,56 +444,61 @@ const Home = () => {
 		getDataApi();
 	}, []);
 	return (
-		<div style={{ marginLeft: "2rem", marginTop: "2rem" }}>
-			<div className="flex">
-				<ProgressBar dataFalse={dataFalse} />
-				<iframe
-					width="200"
-					height="105"
-					src="https://www.youtube.com/embed/VgBKUofIdVo"
-					title="YouTube video player"
-					frameborder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-					allowfullscreen
-					style={{ marginLeft: "2rem", borderRadius: "10px" }}
-				></iframe>
-				<img
-					src="https://th.bing.com/th/id/R.a2c224733ffdc181b0bfd536324d93a1?rik=gIzFArcMNzfy8A&pid=ImgRaw&r=0"
-					alt=""
+		<div className="flex justify-center">
+			<div className="text-center" style={{ marginTop: "2rem" }}>
+				<div className="flex">
+					<ProgressBar dataFalse={dataFalse} dataApi={data} />
+					<iframe
+						width="200"
+						height="105"
+						src="https://www.youtube.com/embed/VgBKUofIdVo"
+						title="YouTube video player"
+						frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen
+						style={{
+							marginLeft: "2.5rem",
+						}}
+						className="rounded-md border border-yellow-500"
+					></iframe>
+					<img
+						src="https://th.bing.com/th/id/R.a2c224733ffdc181b0bfd536324d93a1?rik=gIzFArcMNzfy8A&pid=ImgRaw&r=0"
+						alt=""
+						style={{
+							width: "200px",
+							marginLeft: "2.5rem",
+							height: "105px",
+						}}
+						className="rounded-md border border-yellow-500"
+					/>
+				</div>
+				<div
+					className="flex"
 					style={{
-						width: "200px",
-						marginLeft: "2rem",
-						height: "105px",
-						borderRadius: "10px",
+						display: "flex",
+						marginTop: "1rem",
+						alignItems: "center",
 					}}
+				>
+					{currentCards.map((char, index) => {
+						return (
+							<Link to={`/modal/${char.id}`}>
+								<Card
+									name={char.name}
+									image={char.image}
+									comics={char.comics.length}
+									peliculas={char.peliculas.length}
+								/>
+							</Link>
+						);
+					})}
+				</div>
+				<Pagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					onPageChange={handlePageChange}
 				/>
 			</div>
-			<div
-				className="flex"
-				style={{
-					display: "flex",
-					marginTop: "1rem",
-					alignItems: "center",
-				}}
-			>
-				{currentCards.map((char, index) => {
-					return (
-						<Link to={`/modal/${char.id}`}>
-							<Card
-								name={char.name}
-								image={char.image}
-								comics={char.comics.length}
-								peliculas={char.peliculas.length}
-							/>
-						</Link>
-					);
-				})}
-			</div>
-			<Pagination
-				currentPage={currentPage}
-				totalPages={totalPages}
-				onPageChange={handlePageChange}
-			/>
 		</div>
 	);
 };

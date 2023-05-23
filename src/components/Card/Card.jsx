@@ -33,11 +33,13 @@ const Card = ({ name, image, comics, peliculas }) => {
 	`;
 	return (
 		<article
-			className="rounded-xl border border-gray-700 p-4 w-48 bg-gray-700 mr-5 text-center h-72"
+			className="rounded-md border p-4 mr-5 text-center h-72"
 			style={{
 				backgroundImage: "url(../../../fondoCard.png)",
 				backgroundSize: "cover",
 				backgroundPosition: "center",
+				width: "160px",
+				backgroundColor: "rgba(0, 0, 0, 0.6)",
 			}}
 		>
 			<div className="flex items-center gap-4">
